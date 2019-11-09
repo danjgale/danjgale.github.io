@@ -1,48 +1,15 @@
 ---
 layout: page
-title: projects
-permalink: /projects/
-description: A growing collection of your cool projects.
+title: software
+permalink: /software/
 ---
 
-{% for project in site.projects %}
+## Software
 
-{% if project.redirect %}
-<div class="project">
-    <div class="thumbnail">
-        <a href="{{ project.redirect }}" target="_blank">
-        {% if project.img %}
-        <img class="thumbnail" src="{{ project.img | prepend: site.baseurl | prepend: site.url }}"/>
-        {% else %}
-        <div class="thumbnail blankbox"></div>
-        {% endif %}    
-        <span>
-            <h1>{{ project.title }}</h1>
-            <br/>
-            <p>{{ project.description }}</p>
-        </span>
-        </a>
-    </div>
-</div>
-{% else %}
+### Niimasker
 
-<div class="project ">
-    <div class="thumbnail">
-        <a href="{{ project.url | prepend: site.baseurl | prepend: site.url }}">
-        {% if project.img %}
-        <img class="thumbnail" src="{{ project.img | prepend: site.baseurl | prepend: site.url }}"/>
-        {% else %}
-        <div class="thumbnail blankbox"></div>
-        {% endif %}    
-        <span>
-            <h1>{{ project.title }}</h1>
-            <br/>
-            <p>{{ project.description }}</p>
-        </span>
-        </a>
-    </div>
-</div>
+[Niimasker](https://github.com/danjgale/nii-masker) is a simple commandline tool that extracts and post-processes fMRI data. This tool is a wrapper around [Nilearn](https://nilearn.github.io/index.html), a powerful Python package for fMRI data analysis, and thus extends Nilearn's capabilities to non-Python users. As well, Niimasker provides visual reports for quality assessments, and fully documents the extraction and processing steps to improve reproducibility and transparancy.
 
-{% endif %}
-
-{% endfor %}
+### Contributions to Open Source Projects
+- [AtlasReader](https://github.com/miykael/atlasreader)
+- [Nilearn](https://nilearn.github.io/index.html)

@@ -1,23 +1,17 @@
 ---
 layout: about
 permalink: /
-title: <strong>Your</strong> Name
-description: <a href="">Affiliations</a>. Address. Contacts. Moto. Etc.
+title: <strong>Dan Gale</strong>
+description: <a href="http://neuroscience.queensu.ca">Centre for Neuroscience Studies, Queen's University</a>
 
 profile:
   align: right
-  image: prof_pic.jpg
-  address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
-
-news: true
+  image: profile.png
+news: false
 social: true
 ---
+I am a PhD student in the Centre for Neuroscience Studies at Queen's University, as a member of the [Memory, Action, and Perception Lab](http://www.gallivanmaplab.com/) and the [Cognition and Action Lab](http://www.flanaganlab.com/). My research uses fMRI to understand how the human motor system interacts with various cognitive systems in order to guide goal-behaviour, such as interacting with objects and learning new motor skills. Understanding the processes that govern our motor system not only helps us appreciate how we move about our world in everyday life, but can also guide treatment for neurological disorders and help develop intelligent robotics, such as neural prosthetics.
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Prior to graduate school, I worked for Desid Labs, a small Calgary-based startup to build web applications for healthcare clients. I completed my Bachelors of Science at Queen's University in 2015, where I studied Psychology and Biology.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/){:target="\_blank"} and [Academicons](https://jpswalsh.github.io/academicons/){:target="\_blank"}, like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Outside of research, I am interested in data science and software development. I work on open source [software]() and have provided analysis and consulting for local non-profit organizations through [Data For Good](https://dataforgood.ca/).
