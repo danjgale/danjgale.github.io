@@ -12,8 +12,8 @@ permalink: /software/
 
 ### Voxelwise
 
-A project very much in early development, [Voxelwise](https://github.com/danjgale/voxelwise) is a Python package that makes it easy to perform Multivariate Pattern Analysis with fMRI data. It provides convenient classes to model and extract voxel patterns, and run a full decoding analysis with a comprehensive visual report. Under the hood, Voxelwise relies on Nilearn and Scikit-Learn.
+A project very much in early development, [Voxelwise](https://github.com/danjgale/voxelwise) is a Python package that makes it easy to perform Multivariate Pattern Analysis with fMRI data. It provides classes to conveniently model and extract voxel patterns (using GLMs), and run a full decoding analysis with a comprehensive visual report. Voxelwise uses Nilearn and Scikit-Learn under the hood and follows a similar API design.
 
-### Contributions to Open Source Projects
+### Open Source Projects with Contributions
 - [AtlasReader](https://github.com/miykael/atlasreader)
 - [Nilearn](https://nilearn.github.io/index.html)
