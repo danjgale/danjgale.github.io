@@ -7,7 +7,7 @@ title: publications
 
 ## Publications
 
----
+<br>
 Gallivan, J.P., Chapman, C.S., <b>Gale, D.</b>, Flanagan, J.R. & Culham, J.C. (2019). Selective modulation of early visual cortical activity by movement intention. *Cerebral Cortex, bhy345*. [https://doi.org/10.1093/cercor/bhy345](https://doi.org/10.1093/cercor/bhy345)
 
 ---

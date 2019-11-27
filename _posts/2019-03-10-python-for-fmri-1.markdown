@@ -9,7 +9,7 @@ Those who know me know that I am a huge fan of Python. I find Python to be an in
 
  So, I decided to write a blog post that introduces the Python fMRI landscape by describing some key packages. I hope people can find this useful if they're new to fMRI, new to Python, or both!
 
-## Python's Scientific Computing Ecosystem
+### Python's Scientific Computing Ecosystem
 
 First, just some background on Python in science. Scientific computing with Python is no new concept, but with the rise of data science over the last 10-15 years, and thanks to a number of powerful libraries developed within that time-frame, Python has surged in popularity in recent years for scientific computing and data analysis. Python for data analysis is typically discussed with reference to the "PyData stack", which includes packages such as [*numpy* and *scipy*](https://docs.scipy.org/doc/), [*pandas*](https://pandas.pydata.org/), [*matplotlib*](http://matplotlib.org/), [*scikit-learn*](https://scikit-learn.org/stable/), and [*jupyter*](https://jupyter.org/) (to name a few). There are an overwhelming number of resources on this topic, but the best quality resources I've found are the [Scipy Lectures](http://scipy-lectures.org/), [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) and [Python for Data Analysis](http://wesmckinney.com/pages/book.html) (this last one is not freely available, but I still recommend it). If you're not already acquainted with the basics of Python's scientific computing ecosystem, I suggest diving into those resources first.
 
@@ -19,13 +19,13 @@ MRI analysis with Python has its own set of packages, many of which can be found
 
 A typical project will involve fMRI-specific packages on top of the general scientific packages I mentioned earlier. While such sets of dependencies might sound foreign to more niche programming languages like MATLAB, this reflects the nature of Python being a general programming language. As well, having the ability to require specific dependencies (and particular versions) is great when you begin to use Python across several different projects or domains, because for each project you can only require what you need. Dependency/package management is a whole other topic, and I recommend reading more [here](https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c) and [here](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) if you are interested.
 
-## fMRI Packages
+### fMRI Packages
 
-### Nibabel
+#### Nibabel
 
 [*nibabel*](https://nipy.org/nibabel/) is a package for working with directly with NIfTI files and similar neuroimaging formats (e.g., GIFTI). *nibabel* allows you to read in an image file so you can access the data itself in the form of a *numpy* array, as well as the associated header information and affine matrix. A typical use-case for *nibabel* is to load an image, perform some sort of manipulation (e.g., creating a binary mask based on some threshold), and save the results back to a NIfTI image. Because the data is in a *numpy* array, you can conveniently to use whatever *numpy* functionality you want. All packages discussed here rely on *nibabel* in some form or another to read, process, and save fMRI data files, making *nibabel* an essential package for neuroimaging.
 
-### Nipype
+#### Nipype
 
 [*nipype*](https://nipype.readthedocs.io/en/latest/index.html) is a powerful Python interface for interacting with all major neuroimaging software. Your project might consist of several different software packages (e.g., FSL, SPM), which likely requires managing all sorts of scripts. *nipype* offers a solution to this often messy process by providing a single Python interface to join together tools from different software packages. With *nipype*, you essentially create a network of nodes, each of which are a Python class representing a step in your pipeline. *nipype* provides a syntax that allows you to map each node's inputs and outputs, like various parameters or data files, to one another in order to assemble your pipeline node-by-node.
 
@@ -34,7 +34,7 @@ There are two features I particularly enjoy about *nipype*. First, using *nipype
 
 Personally, I think *nipype* has a steep learning curve. To mitigate this, I highly recommend having solid grasp with whatever fMRI software you are using before transforming it into a Nipype pipeline. Also, there are plenty of resources available; Michael Notter's [fantastic tutorial series](https://miykael.github.io/nipype_tutorial/) are an absolute must-read when starting out, and the *nipype* [documentation/tutorials](https://nipype.readthedocs.io/en/latest/documentation.html) and [publication](https://www.frontiersin.org/articles/10.3389/fninf.2011.00013/full) describe the software in great detail. There is a lot to learn, but *nipype* is definitely worth the investment if you regularly interact with existing fMRI software.
 
-### Nilearn
+#### Nilearn
 
 If I have to pick a favorite package discussed here, [*nilearn*](http://nilearn.github.io/index.html) definitely wins. *nilearn* is a package that provides a number of functions to help perform a variety of multivariate techniques specifically on neuroimaging data. It complements *scikit-learn* (hence the name), the main machine-learning library in Python, and features a similar API design that is straightforward to use.
 
@@ -48,7 +48,7 @@ For further reading, I recommend checking out *nilearn*'s [user guide](http://ni
 {: .notice}
 **Note:** There is a another machine-learning library for neuroimaging called [*PyMVPA*](http://www.pymvpa.org/), which predates *nilearn*. I personally find *nilearn* + *scikit-learn* + *numpy/scipy* sufficient for all my needs thus far and haven't much of a chance to use *PyMVPA*. However, it does have some useful routines for specific use cases, such as [cluster-thresholding searchlight maps](http://www.pymvpa.org/generated/mvpa2.algorithms.group_clusterthr.GroupClusterThreshold.html) and [hyperalignment](http://www.pymvpa.org/generated/mvpa2.algorithms.hyperalignment.html#module-mvpa2.algorithms.hyperalignment). I would encourage anyone to check it out if they might find it useful!
 
-### Nistats
+#### Nistats
 
 For conventional mass-univariate analysis, you can use *nipype* to interact with whatever software you want (e.g., SPM). However, a recent package called [*nistats*](https://nistats.github.io/index.html) let's you model your fMRI data directly in Python. Running univariate analyses within Python is great if you want to extract voxel beta-estimates for subsequent analyses that you're also running in Python (e.g., a decoding analysis with *nilearn*). Moreover, *nistats*  is a breeze if you already know *nilearn* because both packages are largely developed by the same contributors and share similar API design (much like with *scikit-learn*).
 
@@ -56,7 +56,7 @@ For conventional mass-univariate analysis, you can use *nipype* to interact with
 
 As with any package undergoing development in its early stages, *nistats* might change significantly between versions and/or may be more susceptible to bugs. There is also a likelihood that *nistats* [might combine with *nilearn* in the near future](https://github.com/nistats/nistats/issues/233) in the future. The development of *nistats* is very exciting, but I recommend keeping this all in mind if you are interested in using it now.
 
-### Pysurfer
+#### Pysurfer
 
 The last package I want to discuss today is [*pysurfer*](http://pysurfer.github.io/index.html), which lets you interact with [Freesurfer](https://surfer.nmr.mgh.harvard.edu/) to visualize your brain images on surfaces. The package features one major class, `Brain`, which easily lets you add data, regions of interest, contours, and more to your figure. *pysurfer* offers more flexibility than *nilearn* for plotting on 2D surfaces, which makes sense given that visualization is the main purpose. Together with *nilearn*, pretty much all of your common brain plotting tasks can be performed in Python, which ultimately lets you work with Python's plotting ecosystem (e.g., *matplotlib*,  [*seaborn*](https://seaborn.pydata.org/index.html)) to create fully reproducible figures for publication. Excellent examples of *pysurfer* being used "in the wild" are the codebases for Waskom et al [1](https://github.com/WagnerLabPapers/Waskom_CerebCortex_2017) and [2](https://github.com/WagnerLabPapers/Waskom_PNAS_2017).
 
@@ -64,12 +64,12 @@ The last package I want to discuss today is [*pysurfer*](http://pysurfer.github.
 **Note:** There are a few other cool other brain visualization libraries that are definitely worth checking out, like [*pycortex*](https://gallantlab.github.io/) and [*visbrain*](http://visbrain.org/).
 
 
-### Other Packages
+#### Other Packages
 
 There are several other *nipy* packages out there, including [*dipy*](http://nipy.org/dipy/) for diffusion tensor imaging, [*mindboggle*](https://mindboggle.info/) for brain morphometry, and [*nitime*](http://nipy.org/nitime/) for time-series analysis. There are also tons of smaller projects, such as [*NiBetaSeries*](https://github.com/HBClab/NiBetaSeries) for beta-series correlation analysis,  [*atlasreader*](https://github.com/miykael/atlasreader) for automatically extracting cluster information, and [*neurodocker*](https://github.com/kaczmarj/neurodocker) for encapsulating your entire fMRI software environment within Docker. These are just some of what other packages exist; by no means is this an exhaustive list.
 
 
-## Conclusions
+### Conclusions
 
 Altogether, Python provides a rich ecosystem for fMRI. Working with the above-mentioned fMRI packages on top of Python's general scientific ecosystem, it is possible to build any step in your fMRI analysis. Once your data is preprocessed with a *nipype* pipeline (or with [*fmriprep*](https://fmriprep.readthedocs.io/en/stable/index.html), a ready-to-use automated pipeline built with *nipype*), you can work with a variety of packages to analyze and visualize your data all within Python.
 

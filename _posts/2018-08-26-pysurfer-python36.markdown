@@ -5,12 +5,12 @@ date: 2018-08-26
 description: Problems getting Pysurfer installed? Check here!
 ---
 
-{:, .notice}
+---
 **Update:** Pysurfer now supports Python 3.6+ according to the [documentation](http://pysurfer.github.io/install.html). Installation worked well out-of-the-box with `pysurfer>=0.9.0` when I tested it with both Linux and OSX. This is great news. I did have a small issue configuring `QT` to work with pysurfer and I discuss the solution [here](https://github.com/nipy/PySurfer/issues/262#issuecomment-467574981). If you are using earlier versions of Pysurfer, then keep reading.
 
-[Pysurfer](http://pysurfer.github.io) is an excellent Python library for visualizing neuroimaging data using [Freesurfer](https://surfer.nmr.mgh.harvard.edu). With an elegant API and fantastic documentation, Pysurfer is a pleasure to use. Despite this, I _did_ encounter some initial difficulties getting Pysurfer installed in my Python 3.6 workflow.
+---
 
-<!--more-->
+[Pysurfer](http://pysurfer.github.io) is an excellent Python library for visualizing neuroimaging data using [Freesurfer](https://surfer.nmr.mgh.harvard.edu). With an elegant API and fantastic documentation, Pysurfer is a pleasure to use. Despite this, I _did_ encounter some initial difficulties getting Pysurfer installed in my Python 3.6 workflow.
 
 For starters, getting some of Pysurfer's dependencies (e.g., [Mayavi](http://docs.enthought.com/mayavi/mayavi/index.html), [VTK](https://www.vtk.org/)) caused headaches either during the installation process or after; this was no surprise given what's been discussed out there (for example, see [1](https://github.com/enthought/mayavi/issues/625), [2](https://stackoverflow.com/questions/45100010/conflict-while-installing-mayavi-into-anaconda), [3](http://bluesimplex.com/2017/02/04/installing_mayavi_with_python_3.html)). As well, I also expected some difficulty given that the [documentation](http://pysurfer.github.io/install.html), at the time of this writing, states that Pysurfer only works with Python 2. I saw that there had been some [discussion](https://github.com/nipy/PySurfer/issues/217) on getting Pysurfer to work in Python 3 using `conda`, but I was still having some issues, particularly with `VTK` and `PyQt`. Also notice that in the discussion they were able to get it working with Linux, but not MacOs (what I'm using); I suspect that was the source of my problem, or at least part of it.
 
@@ -19,8 +19,8 @@ Sitting down with [Ross Markello](https://twitter.com/rossdavism), we were able 
 Here, I've documented the installation steps to get Pysurfer working with Python 3 on MacOS (I'm guessing these steps also hold for Linux) in a new `conda` environment.
 
 
-## Installation Steps
-**Requirements:** Before we begin, you'll need to install [conda](https://conda.io/docs/) and Freesurfer on your computer (follow the installation steps for your operating system, as is, [here](https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)) if they are not already installed.
+### Installation Steps
+**Requirements:** Before we begin, you'll need to install [conda](https://conda.io/docs/) and Freesurfer (follow the installation steps for your operating system, as is, [here](https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall)) if they are not already installed.
 
 First, let's set up our `conda` environment. We'll want to specify Python 3.6 and install some initial dependencies (note the specific `PyQT` and `VTK` versions):
 
