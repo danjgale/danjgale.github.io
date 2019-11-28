@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Python for fMRI: A Tour of Key fMRI Packages"
+title: "Python for fMRI: A tour of key fMRI packages"
 date: 2019-03-10
 description: An overview of some essential Python packages for doing fMRI analysis
 ---

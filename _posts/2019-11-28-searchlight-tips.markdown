@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Searchlight Analyses with Nilearn "
+title: "Practical searchlight analyses with nilearn "
 date: 2019-11-28
 description: A few things I've found helpful when doing searchlight analyses
 ---
