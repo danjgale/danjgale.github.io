@@ -13,7 +13,7 @@ Here, I go over how I implement a searchlight analysis with [nilearn's `Searchli
 
 ### A minimal example
 
-Before we begin, I'll admit that this post isn't *fully* reproducible; it makes the assumption that you have readily available data to use for a searchlight. This could be a series of single-trial beta images or volumes of interest (i.e. the volume in a trial that you wish to use for searchlight). I also make the assumption that your data is in standard 2mm MNI152 space because I use an MNI brain mask.
+Before we begin, I'll admit that this post isn't *fully* reproducible; it makes the assumption that you have readily available data to use for a searchlight. This could be a series of single-trial beta images or volumes of interest (i.e. the volume in a trial that you wish to use for searchlight). I also make the assumption that your data is in standard 2mm MNI152 space because I use a MNI brain mask.
 
 You can set up your data like so:
 ```python
@@ -54,7 +54,7 @@ searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=logreg)
 results = searchlight.fit_transform(imgs, y)
 ```
 
-But in most cases, we'll want to move beyond just a classifier for our estimator. Typical decoding analyses, like any machine learning task, involve some sort of feature scaling. We can't rescale our input images directly because this would eliminate the independence of our training and validation sets during cross-validation; parameters of the 'unseen' validation set would influence the training set. Rather, a given iteration of cross-validation should rescale the the training and validation sets only using the using the parameters of only the training data. If this is unclear, check out [this Stack Exchange post](https://stats.stackexchange.com/questions/77350/perform-feature-normalization-before-or-within-model-validation).
+But in most cases, we'll want to move beyond just a classifier for our estimator. Typical decoding analyses, like any machine learning task, involve some sort of feature scaling. We can't rescale our input images directly because this would eliminate the independence of our training and validation sets during cross-validation; parameters of the 'unseen' validation set would influence the training set. Rather, a given iteration of cross-validation should rescale the the training and validation sets only using the parameters of the training data. If this is unclear, check out [this Stack Exchange post](https://stats.stackexchange.com/questions/77350/perform-feature-normalization-before-or-within-model-validation).
 
 Scikit-learn has a number of [transformer classes](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing) that do this type of scaling. Much like a scikit-learn estimator, you can *fit* a transformer on the training data, and then *transform* the training and validation sets. These include classes such as `StandardScaler` and `MinMaxScaler`.
 
