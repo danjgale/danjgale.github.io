@@ -43,7 +43,7 @@ Obviously, this example is not at all representative of a searchlight analysis y
 
 We first need to decide on the estimator we use in our analysis. `Searchlight` uses support vector machines (SVM) by default, which is a solid choice because SVMs generally perform well with fMRI data. It's important to note that this default is an instance of [scikit-learn's `LinearSVC`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) estimator with `C=1` (as per the [user guide](https://nilearn.github.io/decoding/searchlight.html#classifier) and the [source code](https://github.com/nilearn/nilearn/blob/master/nilearn/decoding/searchlight.py#L31)). `LinearSVC` uses `LIBLINEAR` under the hood instead of the more well-known `LibSVM` that is used by [`SVC`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC). Although you can expect near identical results between both implementations, you'll want to report the implementation in your paper's methods section. 
 
-`Searchlight` takes any scikit-learn estimator, so you are not limited to using SVMs. For instance, you can pass a logistic regresison model with L1 regularization into `Searchlight` like so:
+`Searchlight` takes any scikit-learn estimator, so you are not limited to using SVMs. For instance, you can pass a logistic regression model with L1 regularization into `Searchlight` like so:
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -71,11 +71,11 @@ searchlight = Searchlight(mask_img=brain_mask, radius=4,
                           estimator=pipeline)
 results = searchlight.fit_transform(imgs, y)
 ```
-In the above example, each cross-validation fold properly *z*-transforms each voxel within the searchlight sphere prior to training and validating a linear SVM classifier. We can easily to modify the pipleline to use a different classifier (e.g., logistic regression) or a different rescaling approach (e.g., mean centering). I think the above code example really speaks to how well nilearn works with scikit-learn. 
+In the above example, each cross-validation fold properly *z*-transforms each voxel within the searchlight sphere prior to training and validating a linear SVM classifier. We can easily to modify the pipeline to use a different classifier (e.g., logistic regression) or a different rescaling approach (e.g., mean centering). I think the above code example really speaks to how well nilearn works with scikit-learn. 
 
 Another approach to rescaling features is to rescale *across* voxels (i.e. rescale each voxel pattern) instead of rescaling *within* voxels. If you come from a more traditional machine learning background, this sounds crazy because your features typically represent different things. However, fMRI data is a special case where the features are all of the same modality (voxels) and rescaling each voxel pattern might be more appropriate than rescaling within each voxel (e.g., wanting to remove amplitude effects in your patterns). For more, see [Misaki et al (2010)](https://www.sciencedirect.com/science/article/pii/S1053811910007834?via%3Dihub). 
 
-Implementing this approach requires a little bit of effort. We need to somehow get `Searchlight` to only rescale the voxels within the searchlight sphere. We cannot rescale within each volume of `imgs` because we would be including non-sphere voxels. Therefore, pattern rescaling would have to be implemented in some sort of scikit-learn pipeline that could be fed into `Searchlight`. Scikit-learn also doens't have a way to change the direction of scaling because this is an atypical use-case. Thankfully, there is a way to create our own custom transformer that can be included in a pipeline. This is done via `FunctionTransformer`:
+Implementing this approach requires a little bit of effort. We need to somehow get `Searchlight` to only rescale the voxels within the searchlight sphere. We cannot rescale within each volume of `imgs` because we would be including non-sphere voxels. Therefore, pattern rescaling would have to be implemented in some sort of scikit-learn pipeline that could be fed into `Searchlight`. Scikit-learn also doesn't have a way to change the direction of scaling because this is an atypical use-case. Thankfully, there is a way to create our own custom transformer that can be included in a pipeline. This is done via `FunctionTransformer`:
 
 ```python
 from scipy.stats import zscore
@@ -90,7 +90,7 @@ searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline)
 results = searchlight.fit_transform(imgs, y)
 ```
 
-Here, we've created a scikit-learn transformer for scipy's `zscore` function with `axis=1` so that we scale within each pattern insead of within each voxel. I recommend trying each approach and comparing the searchlight maps for curiosity's sake.  
+Here, we've created a scikit-learn transformer for scipy's `zscore` function with `axis=1` so that we scale within each pattern instead of within each voxel. I recommend trying each approach and comparing the searchlight maps for curiosity's sake.  
 
 ### Defining a cross-validation scheme
 
