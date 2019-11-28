@@ -134,7 +134,8 @@ Now we can put things together to turn our minimal example into a fully-fledged 
 
 ```python
 from nilearn.decoding import Searchlight
-from nilearn.datasets import load_mni152_brain_mask 
+from nilearn.datasets import load_mni152_brain_mask
+from nilearn.image import new_img_like 
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from skearn.svm import LinearSVC
