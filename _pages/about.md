@@ -10,7 +10,7 @@ profile:
 news: false
 social: true
 ---
-I am a PhD student in the Centre for Neuroscience Studies at Queen's University, as a member of the [Memory, Action, and Perception Lab](http://www.gallivanmaplab.com/) and the [Cognition and Action Lab](http://www.flanaganlab.com/). 
+I am a PhD student in the [Memory, Action, and Perception](http://www.gallivanmaplab.com/) and the [Cognition and Action](http://www.flanaganlab.com/) labs at the Centre for Neuroscience Studies at Queen's University. 
 
 I use functional fMRI to explore how the brain's motor system interacts with cognitive and sensory systems in order to guide goal-directed actions. Understanding the processes that govern our motor system not only helps us appreciate how we move about our world in everyday life, but can also guide treatment for neurological disorders and help develop intelligent robotics, such as neural prosthetics.
 
