@@ -26,13 +26,15 @@ From here, it's straightforward to construct a bare-bones searchlight that is si
 
 ```python
 from nilearn.decoding import Searchlight
+from nilearn.image import new_img_like
 from nilearn.datasets import load_mni152_brain_mask 
 
 # restrict searchlight to brain voxels only
 brain_mask = load_mni152_brain_mask()
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4)
-results = searchlight.fit_transform(imgs, y)
+searchlight.fit(imgs, y)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 `results` will be a NIfTI image of containing the average cross-validation accuracy for each voxel. 
 
@@ -51,7 +53,8 @@ from sklearn.linear_model import LogisticRegression
 logreg = LogisticRegression('l1', solver='saga')
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=logreg)
-results = searchlight.fit_transform(imgs, y)
+searchlight.fit(imgs, y)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 
 But in most cases, we'll want to move beyond just a classifier for our estimator. Typical decoding analyses, like any machine learning task, involve some sort of feature scaling. We can't rescale our input images directly because this would eliminate the independence of our training and validation sets during cross-validation; parameters of the 'unseen' validation set would influence the training set. Rather, a given iteration of cross-validation should rescale the the training and validation sets only using the parameters of the training data. If this is unclear, check out [this Stack Exchange post](https://stats.stackexchange.com/questions/77350/perform-feature-normalization-before-or-within-model-validation).
@@ -69,7 +72,8 @@ pipeline = make_pipeline(StandardScaler(), LinearSVC())
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4, 
                           estimator=pipeline)
-results = searchlight.fit_transform(imgs, y)
+searchlight.fit(imgs, y)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 In the above example, each cross-validation fold properly *z*-transforms each voxel within the searchlight sphere prior to training and validating a linear SVM classifier. We can easily to modify the pipeline to use a different classifier (e.g., logistic regression) or a different rescaling approach (e.g., mean centering). I think the above code example really speaks to how well nilearn works with scikit-learn. 
 
@@ -87,7 +91,8 @@ pattern_scaler = FunctionTransformer(zscore, kw_args={'axis': 1},
 pipeline = make_pipeline(pattern_scaler, LinearSVC())
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline)
-results = searchlight.fit_transform(imgs, y)
+searchlight.fit(imgs, y)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 
 Here, we've created a scikit-learn transformer for scipy's `zscore` function with `axis=1` so that we scale within each pattern instead of within each voxel. I recommend trying each approach and comparing the searchlight maps for curiosity's sake.  
@@ -106,7 +111,8 @@ from sklearn.model_selection import LeaveOneOut
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline, 
                           cv=LeaveOneOut())
-results = searchlight.fit_transform(imgs, y)
+searchlight.fit(imgs, y)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 
 LOROCV requires additional labels to group each image according to its scanning run. Then, these labels are fed into `fit_transform`: 
@@ -118,7 +124,8 @@ run_labels = # array-like of run labels for each volume of `imgs`
 
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline, 
                           cv=LeaveOneGroupOut())
-results = searchlight.fit_transform(imgs, y, groups=run_labels)
+searchlight.fit(imgs, y, groups=run_labels)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 
 ### Putting it all together
@@ -142,7 +149,8 @@ pipeline = make_pipeline(StandardScaler(), LinearSVC())
 brain_mask = load_mni152_brain_mask()
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline, 
                           cv=LeaveOneGroupOut())
-results = searchlight.fit_transform(imgs, y, groups=run_labels)
+searchlight.fit(imgs, y, groups=run_labels)
+results = new_img_like(brain_mask, searclight.scores_)
 ```
 Voila! There is a single-subject searchlight pipeline. You can imagine putting this into a function and running this for each subject.
 
