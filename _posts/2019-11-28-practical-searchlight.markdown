@@ -138,7 +138,7 @@ from nilearn.datasets import load_mni152_brain_mask
 from nilearn.image import new_img_like 
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from skearn.svm import LinearSVC
+from sklearn.svm import LinearSVC
 from sklearn.model_selection import LeaveOneGroupOut
 
 imgs = # 4D NIfTI image or list of 3D NIfTI images
@@ -151,7 +151,7 @@ brain_mask = load_mni152_brain_mask()
 searchlight = Searchlight(mask_img=brain_mask, radius=4, estimator=pipeline, 
                           cv=LeaveOneGroupOut())
 searchlight.fit(imgs, y, groups=run_labels)
-results = new_img_like(brain_mask, searclight.scores_)
+results = new_img_like(brain_mask, searchlight.scores_)
 ```
 Voila! There is a single-subject searchlight pipeline. You can imagine putting this into a function and running this for each subject.
 
