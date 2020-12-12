@@ -20,14 +20,9 @@ These software projects are largely motivated by gaps I indentify in my lab's an
 
 [Voxelwise](https://github.com/danjgale/voxelwise) is a Python package in its early stages that simplifies multivariate pattern analysis with fMRI data. It aims to provide everything you need for an end-to-end analysis.  
 
-### wb_sanity
-
-[wb_sanity](https://github.com/danjgale/wb_sanity) is a collection of functions that make deriving simple, everyday surface visualizations with [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) a little less cumbersome. 
-
-
 ## Open Source Involvement
 
-In addition to my own projects, I also contribute to the following projects:
+In addition to my own projects, I also have contributions in the following projects:
 
 - [Nilearn](https://nilearn.github.io/index.html)
 - [AtlasReader](https://github.com/miykael/atlasreader)
