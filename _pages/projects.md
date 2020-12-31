@@ -6,11 +6,11 @@ permalink: /software/
 
 ## Software
 
-These software projects are largely motivated by gaps I indentify in my lab's analysis pipelines. They serve to address these gaps, but also aim to be useful to anyone in general.
+These software projects are largely motivated by gaps that I've identified in my lab's analysis pipelines, but are also intended to be used by anyone outside of the lab. These projects are undergoing semi-active development, and I would encourage anyone to get in touch or raise a Github issue if they have questions! 
 
 ### Bidsconv
 
-[bidsconv](https://danjgale.github.io/bidsconv/) is a convenient wrapper around [dcm2bids](https://cbedetti.github.io/Dcm2Bids/) for DICOM to [BIDS](https://bids.neuroimaging.io/) conversions in our lab. This tool ensures that our data is consistently organized from project to project. 
+[bidsconv](https://danjgale.github.io/bidsconv/) is a convenient wrapper around [dcm2bids](https://cbedetti.github.io/Dcm2Bids/) for DICOM to [BIDS](https://bids.neuroimaging.io/) conversions in our lab. This tool ensures that our MRI data is consistently organized from project to project. 
 
 ### Niimasker
 
@@ -24,5 +24,5 @@ These software projects are largely motivated by gaps I indentify in my lab's an
 
 In addition to my own projects, I also have contributions in the following projects:
 
-- [Nilearn](https://nilearn.github.io/index.html)
 - [AtlasReader](https://github.com/miykael/atlasreader)
+- [Nilearn](https://nilearn.github.io/index.html)

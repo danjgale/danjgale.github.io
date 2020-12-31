@@ -48,7 +48,7 @@ blog_name: Blog
 blog_description: On fMRI, data analysis, and open-source software  
 
 # Pagination
-paginate: 4
+paginate: 10
 permalink: /blog/:year/:title/
 paginate_path: /blog/page:num/
 
