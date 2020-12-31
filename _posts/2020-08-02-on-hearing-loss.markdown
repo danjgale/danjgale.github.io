@@ -2,7 +2,6 @@
 layout: post
 title: "On hearing loss"
 date: 2020-08-02
-description: My experience with an invisible disability in academia
 ---
 
 As a departure from the existing posts here focused on neuroimaging and programming, I want to take time to share my experience of being in academia with my congenital hearing loss. 

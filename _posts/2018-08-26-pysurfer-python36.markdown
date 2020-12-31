@@ -2,7 +2,6 @@
 layout: post
 title: "Setting up pysurfer in python 3.6"
 date: 2018-08-26
-description: Problems getting Pysurfer installed? Check here!
 ---
 
 ---

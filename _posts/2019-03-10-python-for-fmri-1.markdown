@@ -2,7 +2,6 @@
 layout: post
 title: "Python for fMRI: A tour of key fMRI packages"
 date: 2019-03-10
-description: An overview of some essential Python packages for doing fMRI analysis
 ---
 
 Those who know me know that I am a huge fan of Python. I find Python to be an incredibly useful programming language for neuroscience and I prefer it to other languages for fMRI research (although I am not interested in engaging in any sort of "language war", see [here](https://sebastianraschka.com/blog/2015/why-python.html) for a nice discussion on that). Recent commentaries from [Poldrack et al](https://arxiv.org/abs/1809.10024) and [Wessel et al](https://www.cell.com/trends/cognitive-sciences/fulltext/S1364-6613(19)30021-X), along with [summer school programs](https://neurohackademy.org/) aimed towards open source software in science, suggest that Python is growing in neuroscience. Anecdotally, I have seen more and more colleagues show interest in Python, with some making the full switch altogether.

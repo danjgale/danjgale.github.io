@@ -2,7 +2,6 @@
 layout: post
 title: "Three levels of interpretation"
 date: 2020-11-08
-description: How to actually interpret your data 
 ---
 
 Lately I've been thinking about how I can avoid over-interpreting the analyses and results in my research. It's so easy to get a over-excited about a result; before you even realize, you start to over-sell your finding (to yourself, to colleagues, etc) and interpret the data beyond what it can actually tell you. You may start to focus on the more speculative aspects of your finding and end up blurring the line between pure speculation and accurate interpretation.

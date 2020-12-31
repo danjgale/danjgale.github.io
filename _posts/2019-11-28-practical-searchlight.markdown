@@ -2,7 +2,6 @@
 layout: post
 title: "Practical searchlight analyses with nilearn "
 date: 2019-11-28
-description: A few things I've found helpful when doing searchlight analyses
 ---
 
 A searchlight analysis is a common fMRI technique that deploys pattern classification or representational similarity analysis across the entire brain. Areas thought to be involved in a task can be readily mapped across brain using local multivariate information rather than gross univariate differences between conditions (as with conventional GLM approaches). 
