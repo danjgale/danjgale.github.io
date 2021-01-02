@@ -9,6 +9,12 @@ I had an old T1w scan of mine kicking around (who doesn't?) and I wondered if I 
 I figured the easiest approach would be to run a Canny filter to generate a binary brain trace, which could then be smoothed and stylized for artistic effect. This is all done with a simple function:
 
 ```python
+import numpy as np
+import nibabel as nib
+from skimage import feature, transform
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
 def make_brain_trace(fname, out, figsize=(8, 8)):
     """Converts image of a brain slice to an artistic binary trace  
 
