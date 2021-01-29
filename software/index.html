@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Dan Gale</title>
+  <title>Dan Gale | software</title>
   <meta name="description" content="Personal website and portfolio
 ">
 
@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="/assets/img/favicon.ico">
 
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="canonical" href="/blog/">
+  <link rel="canonical" href="/software/">
 </head>
 
 
@@ -90,56 +90,41 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <a class="post-content"><h2>Blog</h2></a>
+        <div class="post">
 
-<ul class="post-list">
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2021/brain-art/">Making brain art</a></h2>
-      <p class="post-meta">January 2, 2021</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2020/tips-for-fmri/">Tips for your first fMRI project</a></h2>
-      <p class="post-meta">December 30, 2020</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2020/interpretation/">Three levels of interpretation</a></h2>
-      <p class="post-meta">November 8, 2020</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2020/on-hearing-loss/">On hearing loss</a></h2>
-      <p class="post-meta">August 2, 2020</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2019/practical-searchlight/">Practical searchlight analyses with nilearn </a></h2>
-      <p class="post-meta">November 28, 2019</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2019/python-for-fmri-1/">Python for fMRI: A tour of key fMRI packages</a></h2>
-      <p class="post-meta">March 10, 2019</p>
-      <p></p>
-    </li>
-  
-    <li>
-      <h2><a class="post-title" href="/blog/2018/pysurfer-python36/">Setting up pysurfer in python 3.6</a></h2>
-      <p class="post-meta">August 26, 2018</p>
-      <p></p>
-    </li>
-  
+  <article class="post-content software clearfix">
+    <h2 id="software">Software</h2>
+
+<p>These software projects are largely motivated by gaps that I’ve identified in my lab’s analysis pipelines, but are also intended to be used by anyone outside of the lab. These projects are undergoing semi-active development, and I would encourage anyone to get in touch or raise a Github issue if they have questions!</p>
+
+<h3 id="bidsconv">Bidsconv</h3>
+
+<p><a href="https://danjgale.github.io/bidsconv/">bidsconv</a> is a convenient wrapper around <a href="https://cbedetti.github.io/Dcm2Bids/">dcm2bids</a> for DICOM to <a href="https://bids.neuroimaging.io/">BIDS</a> conversions in our lab. This tool ensures that our MRI data is consistently organized from project to project.</p>
+
+<h3 id="niimasker">Niimasker</h3>
+
+<p><a href="https://github.com/danjgale/nii-masker">Niimasker</a> is a simple command-line tool that extracts and post-processes fMRI data. This tool is a built around <a href="https://nilearn.github.io/index.html">Nilearn</a>, a Python package for fMRI data analysis, with some extra bells and whistles.</p>
+
+<h3 id="voxelwise">Voxelwise</h3>
+
+<p><a href="https://github.com/danjgale/voxelwise">Voxelwise</a> is a Python package in its early stages that simplifies multivariate pattern analysis with fMRI data. It aims to provide everything you need for an end-to-end analysis.</p>
+
+<h2 id="open-source-involvement">Open Source Involvement</h2>
+
+<p>In addition to my own projects, I also have contributions in the following projects:</p>
+
+<ul>
+  <li><a href="https://github.com/miykael/atlasreader">AtlasReader</a></li>
+  <li><a href="https://nilearn.github.io/index.html">Nilearn</a></li>
 </ul>
 
+  </article>
 
+  
 
+  
+
+</div>
 
       </div>
     </div>
