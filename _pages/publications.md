@@ -8,7 +8,7 @@ title: publications
 
 #### Peer reviewed:
 
-<b>Gale, D. J.</b>, Areshenkoff, C. N., Honda, C., Johnsrude, I. S., Randall Flanagan, J., & Gallivan, J. P. (Accepted). Motor planning modulates neural activity patterns in early human auditory cortex. *Cerebral Cortex*. Preprint: [https://doi.org/10.1101/682609](https://doi.org/10.1101/682609)
+<b>Gale, D. J.</b>, Areshenkoff, C. N., Honda, C., Johnsrude, I. S., Randall Flanagan, J., & Gallivan, J. P. (2021). Motor planning modulates neural activity patterns in early human auditory cortex. *Cerebral Cortex, bhaa403*. [https://doi.org/10.1093/cercor/bhaa403](https://doi.org/10.1093/cercor/bhaa403)
 
 Moskowitz, J. B., <b>Gale, D. J.</b>, Gallivan, J. P., Wolpert, D. M., & Flanagan, J. R. (2020). Human decision making anticipates future performance in motor learning. *PLoS Computational Biology*, *16(2)*, e1007632. [https://doi.org/10.1371/journal.pcbi.1007632](https://doi.org/10.1371/journal.pcbi.1007632)
 
