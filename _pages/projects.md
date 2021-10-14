@@ -4,25 +4,26 @@ title: software
 permalink: /software/
 ---
 
-## Software
+# Software
 
-These software projects are largely motivated by gaps that I've identified in my lab's analysis pipelines, but are also intended to be used by anyone outside of the lab. These projects are undergoing semi-active development, and I would encourage anyone to get in touch or raise a Github issue if they have questions! 
+The packages I've developed below are largely motivated by gaps that I've identified in our research group's analysis pipelines, but aim to be useful for anyone analyzing fMRI data. Please feel free to get in touch and/or raise an issue on Github if you are interested in contributing, spot a bug, or have questions.
 
-### Bidsconv
+### Surfplot
 
-[bidsconv](https://danjgale.github.io/bidsconv/) is a convenient wrapper around [dcm2bids](https://cbedetti.github.io/Dcm2Bids/) for DICOM to [BIDS](https://bids.neuroimaging.io/) conversions in our lab. This tool ensures that our MRI data is consistently organized from project to project. 
+[surfplot](https://github.com/danjgale/surfplot) is a Python package for plotting publication-ready brain surfaces figures (e.g., statistical maps, parcellations). Users can easily add plotting layers, customize figure styling, and integrate plots into existing matplotlib workflows. See [documentation](https://surfplot.readthedocs.io/en/latest/)
+ 
+### Nixtract
 
-### Niimasker
+[nixtract](https://github.com/danjgale/nixtract) is a command-line tool to extract timeseries from different MRI file types (NIFTI, GIFTI, and CIFTI). nixtract is designed to be programming language-agnostic and compatible with any neuroimaging pipeline. Finally, nixtract can also run several automated quality control analyses to check the quality the timeseries data, which is a critical step in any fMRI project.
 
-[Niimasker](https://github.com/danjgale/nii-masker) is a simple command-line tool that extracts and post-processes fMRI data. This tool is a built around [Nilearn](https://nilearn.github.io/index.html), a Python package for fMRI data analysis, with some extra bells and whistles. 
+### Reg-fusion
 
-### Voxelwise
+[Reg-fusion](https://github.com/danjgale/reg-fusion) is a Python package that accurately projects MRI data in standard volumetric space (e.g., MNI space) to the *fsaverage* cortical surface--a common task in neuroimaging. It is a pure-Python implementation of the highly accurate registration fusion approach described [Wu et al. (2018)](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.24213).   
 
-[Voxelwise](https://github.com/danjgale/voxelwise) is a Python package in its early stages that simplifies multivariate pattern analysis with fMRI data. It aims to provide everything you need for an end-to-end analysis.  
+# Open-Source Involvement
 
-## Open Source Involvement
-
-In addition to my own projects, I also have contributions in the following projects:
+In addition to my own projects, I've contributed to the following projects:
 
 - [AtlasReader](https://github.com/miykael/atlasreader)
 - [Nilearn](https://nilearn.github.io/index.html)
+- [Brainspace](https://github.com/MICA-MNI/BrainSpace)

@@ -45,5 +45,3 @@ def make_brain_trace(fname, out, figsize=(8, 8)):
 So, all I did was take a screenshot of my (skull-stripped) brain and run it through the function. You can see the before and after below: 
 
 <img style="display:block; margin-left:auto; margin-right:auto;" src="{{ site.baseurl }}/assets/img/brain_art.png">
-
-Not bad!

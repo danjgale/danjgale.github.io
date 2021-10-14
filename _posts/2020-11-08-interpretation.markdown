@@ -39,7 +39,7 @@ Essentially, Tier 1 and 2 should make up the ingredients of a Results section; y
 Tier 3 moves beyond the Results section and should be potential talking points of a Discussion section. Are these data consistent with other experiments or, more broadly, the literature? What could be the mechanism that produces such a result? What are some confounds that you couldn't control for in your experiment? What alternative explanations are there and what is the best one? Et cetera. Discuss and speculate as much as you want in your Tier 3 notes.
 
 Hypothetical notes could look like this:
-- Despite our mere correlation, it might be reasonable to speculate a causal relationship between *X* and *Y* because paper *A* and *B* have identified a mechanism that nicely explain these data 
+- Although we only have a correlation, it might be reasonable to *speculate* on a causal relationship between *X* and *Y* because paper *A* and *B* have identified a mechanism that nicely explain these data 
 - Paper *C* has also found similar results in a proper causal paradigm
 - However, we have to be careful because our data cannot speak to *\*insert spooky confound here\**
 - These data seem to be consistent with *\*major theory\**, but also a somewhat consistent with *\*other major theory\** . At this point we can't really rule out one or the other

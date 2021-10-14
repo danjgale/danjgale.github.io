@@ -4,7 +4,7 @@ permalink: /funding/
 title: funding and awards
 ---
 
-## Funding and Awards
+# Funding and Awards
 
 ### Doctoral Scholarships
 - Natural Sciences and Engineering Research Council of Canada (NSERC) Alexander Graham Bell Canada Graduate Scholarship (2019-Present)

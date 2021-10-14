@@ -2,14 +2,15 @@
 layout: default
 ---
 
-<a class="post-content"><h2>Blog</h2></a>
+<a class="post-content"><h1>Blog</h1></a>
 
 <ul class="post-list">
   {% for post in paginator.posts %}
     <li>
-      <h2><a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-      <p class="post-meta">{{ post.date | date: '%B %-d, %Y' }}</p>
+      <p class="post-meta">{{ post.date | date: '%m/%d/%Y' }}</p>
+      <a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
       <p>{{ post.description }}</p>
+
     </li>
   {% endfor %}
 </ul>
