@@ -1,7 +1,7 @@
 ---
 layout: about
 permalink: /
-title: <h1>Dan Gale</h1>
+title: <h2>Dan Gale</h2>
 description: Neuroscience | Data Science | Software Development
 
 profile:

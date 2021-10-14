@@ -4,13 +4,13 @@ title: software
 permalink: /software/
 ---
 
-# Software
+## Software
 
 The packages I've developed below are largely motivated by gaps that I've identified in our research group's analysis pipelines, but aim to be useful for anyone analyzing fMRI data. Please feel free to get in touch and/or raise an issue on Github if you are interested in contributing, spot a bug, or have questions.
 
 ### Surfplot
 
-[surfplot](https://github.com/danjgale/surfplot) is a Python package for plotting publication-ready brain surfaces figures (e.g., statistical maps, parcellations). Users can easily add plotting layers, customize figure styling, and integrate plots into existing matplotlib workflows. See [documentation](https://surfplot.readthedocs.io/en/latest/)
+[surfplot](https://github.com/danjgale/surfplot) is a Python package for plotting publication-ready brain surfaces figures (e.g., statistical maps, parcellations). Users can easily add plotting layers, customize figure styling, and integrate plots into existing matplotlib workflows. See [documentation](https://surfplot.readthedocs.io/en/latest/) for more.
  
 ### Nixtract
 
@@ -20,7 +20,7 @@ The packages I've developed below are largely motivated by gaps that I've identi
 
 [Reg-fusion](https://github.com/danjgale/reg-fusion) is a Python package that accurately projects MRI data in standard volumetric space (e.g., MNI space) to the *fsaverage* cortical surface--a common task in neuroimaging. It is a pure-Python implementation of the highly accurate registration fusion approach described [Wu et al. (2018)](https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.24213).   
 
-# Open-Source Involvement
+## Open-Source Involvement
 
 In addition to my own projects, I've contributed to the following projects:
 
