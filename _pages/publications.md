@@ -8,6 +8,10 @@ title: publications
 
 ### Peer reviewed:
 
+Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Standage, D., Flanagan, J. R., Gallivan J. P. (2021). Neural excursions from manifold structure explain patterns of learning during human sensorimotor adaptation. *eLife*. [doi.org/10.7554/eLife.74591](doi.org/10.7554/eLife.74591)
+
+Segal, J. P., Phillips S., Dubois, R. M., Silva, J. R., Haird, C. M., <b>Gale, D.</b>, Hopman, W. M., Gallivan, J., Gilron, I., Ghasemlou, N. (2021). Weight bearing as a measure of disease progression in experimental autoimmune encephalomyelitis. *Journal of Neuroimmunology, 361*, 577730. [doi.org/10.1016/j.jneuroim.2021.577730](https://doi.org/10.1016/j.jneuroim.2021.577730)
+
 <b>Gale, D. J.</b>, Flanagan, J. R., & Gallivan, J. P. (2021). Human somatosensory cortex is modulated during motor planning. *Journal of Neuroscience, 41(27)*, 5909–5922. [doi.org/10.1523/JNEUROSCI.0342-21.2021](https://doi.org/10.1523/JNEUROSCI.0342-21.2021) 
 
 <b>Gale, D. J.</b>, Areshenkoff, C. N., Honda, C., Johnsrude, I. S., Flanagan, J. R., & Gallivan, J. P. (2021). Motor planning modulates neural activity patterns in early human auditory cortex. *Cerebral Cortex, bhaa403*. [doi.org/10.1093/cercor/bhaa403](https://doi.org/10.1093/cercor/bhaa403)
@@ -21,8 +25,6 @@ Notter, M.P., <b>Gale, D.</b>, Herholz, P., Markello, R., Notter-Bielser, M. & W
 Best, M. W., <b>Gale, D.</b>, Tran, T., Haque, M. K., & Bowie, C. R. (2017). Brief executive function training for individuals with severe mental illness: Effects on EEG synchronization and executive functioning. *Schizophrenia research*, *203*, 32-40. [doi.org/10.1016/j.schres.2017.08.052](https://doi.org/10.1016/j.schres.2017.08.052)
 
 ### Preprints:
-
-Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Standage, D., Flanagan, J. R., Gallivan J. P. (2021). Neural Excursions from Low-Dimensional Manifold Structure Explain Intersubject Variation in Human Motor Learning. bioRxiv. [doi.org/10.1101/2021.09.01.458601](doi.org/10.1101/2021.09.01.458601)
 
 Standage, D. I., Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Flanagan, J. R., & Gallivan, J. P. (2020). Whole-brain dynamics of human sensorimotor adaptation. *bioRxiv p. 2020.11.27.401679*. [doi.org/10.1101/2020.11.27.401679](https://doi.org/10.1101/2020.11.27.401679)
 
