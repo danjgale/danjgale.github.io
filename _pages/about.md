@@ -10,6 +10,7 @@ profile:
 news: false
 social: true
 ---
-I am a PhD candidate in the [Memory, Action, and Perception](http://www.gallivanmaplab.com/) and the [Cognition and Action](http://www.flanaganlab.com/) labs at the Centre for Neuroscience Studies at Queen's University. 
 
-My [research](/publications) uses functional MRI to study how the brain's sensory and motor systems interact in order to guide basic movements, and how these interactions change as a result of learning new tasks. I also develop data pipelines for both human and non-human primate neuroimaging, and build [open source software](/software).
+I am a Data Scientist with [VoxelAI]() and a Research Associate with the Centre for Neuroscience Studies at Queen's University. Across both roles, I develop state-of-the-art brain imaging platforms for clinical and research purposes.
+
+I completed my PhD in Neuroscience at Queen's University under the supervision of [Dr. Jason Gallivan](http://www.gallivanmaplab.com/) and [Dr. Randy Flanagan](http://www.flanaganlab.com/). For fun, I build [open source software](/software) for analyzing and visualizing brain imaging data. 

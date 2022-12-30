@@ -6,8 +6,6 @@ permalink: /software/
 
 ## Software
 
-I initially developed these packages to address gaps that I identified in our research group's analysis workflows, which have subsequently streamlined our research. However, these packages aim to be useful beyond our lab; I hope that they benefit anyone analyzing (f)MRI data. Please feel free to get in touch and/or raise an issue on Github if you are interested in contributing, spot a bug, or have questions. Feedback always welcome!
-
 ### Surfplot
 
 [surfplot](https://github.com/danjgale/surfplot) is a Python package for plotting publication-ready brain surfaces figures (e.g., statistical maps, parcellations). Users can easily add plotting layers, customize figure styling, and integrate plots into existing matplotlib workflows. See [documentation](https://surfplot.readthedocs.io/en/latest/) for more detail.

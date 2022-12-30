@@ -1,14 +1,18 @@
 ---
 layout: page
-permalink: /publications/
-title: publications
+permalink: /research/
+title: research
 ---
 
 ## Publications
 
 ### Peer reviewed:
 
-Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Standage, D., Flanagan, J. R., Gallivan J. P. (2021). Neural excursions from manifold structure explain patterns of learning during human sensorimotor adaptation. *eLife*. [doi.org/10.7554/eLife.74591](doi.org/10.7554/eLife.74591)
+**Gale, D. J.**, Areshenkoff, C. N., Standage, D. I., Nashed, J. Y., Markello, R. D., Flanagan, J. R., Smallwood, J., & Gallivan, J. P. (2022). Distinct patterns of cortical manifold expansion and contraction underlie human sensorimotor adaptation. *Proceedings of the National Academy of Sciences*, 119(52), e2209960119. [doi/10.1073/pnas.2209960119](https://www.pnas.org/doi/10.1073/pnas.2209960119)
+
+Standage, D. I., Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Flanagan, J. R., & Gallivan, J. P. (2022). Whole-brain dynamics of human sensorimotor adaptation. *Cerebral Cortex, bhac378*. [doi.org/10.1093/cercor/bhac378](https://doi.org/10.1093/cercor/bhac378)
+
+Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Standage, D., Flanagan, J. R., Gallivan J. P. (2022). Neural excursions from manifold structure explain patterns of learning during human sensorimotor adaptation. *eLife*. [doi.org/10.7554/eLife.74591](doi.org/10.7554/eLife.74591)
 
 Segal, J. P., Phillips S., Dubois, R. M., Silva, J. R., Haird, C. M., <b>Gale, D.</b>, Hopman, W. M., Gallivan, J., Gilron, I., Ghasemlou, N. (2021). Weight bearing as a measure of disease progression in experimental autoimmune encephalomyelitis. *Journal of Neuroimmunology, 361*, 577730. [doi.org/10.1016/j.jneuroim.2021.577730](https://doi.org/10.1016/j.jneuroim.2021.577730)
 
@@ -24,14 +28,22 @@ Notter, M.P., <b>Gale, D.</b>, Herholz, P., Markello, R., Notter-Bielser, M. & W
 
 Best, M. W., <b>Gale, D.</b>, Tran, T., Haque, M. K., & Bowie, C. R. (2017). Brief executive function training for individuals with severe mental illness: Effects on EEG synchronization and executive functioning. *Schizophrenia research*, *203*, 32-40. [doi.org/10.1016/j.schres.2017.08.052](https://doi.org/10.1016/j.schres.2017.08.052)
 
-### Preprints:
-
-Standage, D. I., Areshenkoff, C. N., <b>Gale, D. J.</b>, Nashed, J. Y., Flanagan, J. R., & Gallivan, J. P. (2020). Whole-brain dynamics of human sensorimotor adaptation. *bioRxiv p. 2020.11.27.401679*. [doi.org/10.1101/2020.11.27.401679](https://doi.org/10.1101/2020.11.27.401679)
-
 ### Software:
 
 <b>Gale, D. J.</b>, Vos de Wael., R., Benkarim, O., & Bernhardt, B. (2021). Surfplot: Publication-ready brain surface figures (v0.1.0). Zenodo. [doi.org/10.5281/zenodo.5567926](https://doi.org/10.5281/zenodo.5567926)
 
+
+*For full detail, see [Google Scholar](https://scholar.google.ca/citations?user=j2_4DmEAAAAJ&hl=en)*
+
+
 ---
 
-See [Google Scholar](https://scholar.google.ca/citations?user=j2_4DmEAAAAJ&hl=en) for more detail.
+## Funding and Awards
+
+### Doctoral Scholarships (2018-2022)
+- Natural Sciences and Engineering Research Council of Canada (NSERC) Alexander Graham Bell Canada Graduate Scholarship (2019-2022)
+- Queen's University Graduate Research Fellowship (2019-2022)
+- Queen's University R.S. McLaughlin / Franklin and Helene Bracken Fellowship (2018-2019)
+
+### Master's Scholarships (2016-2018)
+- Natural Sciences and Engineering Research Council of Canada (NSERC) Canada Graduate Scholarship-Master's (2017-2018)
