@@ -6,7 +6,7 @@ description: Neuroscience | Data Science | Software Development
 
 profile:
   align: right
-  image: profile.jpg
+  image: profile.png
 news: false
 social: true
 ---
