@@ -43,3 +43,11 @@
     margin-top: 50px;
     padding-top: 20px;
 }
+
+.circular--square { 
+    border-top-left-radius: 50% 50%; 
+    border-top-right-radius: 50% 50%; 
+    border-bottom-right-radius: 50% 50%; 
+    border-bottom-left-radius: 50% 50%; 
+    box-shadow: 0 0 5px $grey-color;
+}
