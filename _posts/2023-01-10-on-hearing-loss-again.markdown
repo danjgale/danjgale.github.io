@@ -4,7 +4,7 @@ title: "On hearing loss (again)"
 date: 2023-01-10
 ---
 
-Recently I had a conversation about my [previous post](/blog/2020/on-hearing-loss/) with a dear friend, who encouraged me to continue sharing about my experiences with hearing loss. The conversation centered around the invisibility aspect of hearing loss, and this post serves to more broadly meditate on those points from the previous post. 
+Recently I had a conversation about my [previous post](/blog/2020/on-hearing-loss/) with a dear friend, who encouraged me to continue sharing my experiences with hearing loss. The conversation centered around the invisibility aspect of hearing loss, and this post serves to more broadly discuss those points from the previous post. 
 
 Invisible disabilities are disabilities that have no immediately obvious tells, and therefore often go unnoticed. These disabilities can be anything from chronic pain and fatigue, chronic illness, and mental illness. As I mentioned in the previous post, hearing loss can fall into this category because hearing loss can be physically hidden (i.e. discrete hearing aids or no hearing aids at all) as well as masked by coping mechanisms, giving the illusion of normal function. The burden thus falls on the individual to be a constant advocate for themselves.
 
