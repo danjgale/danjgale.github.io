@@ -44,8 +44,8 @@ Areshenkoff, C. N., De Brouwer, A., Gale, D. J., Nashed, J. Y., & Gallivan, J. P
 
 ## Funding and Awards
 
-### Post-Doctoral Awards (2023-)
-- Mitacs Post-doctoral Accelerate Program (2023-)
+### Post-Doctoral Awards (2023-Present)
+- Mitacs Post-doctoral Accelerate Program (2023-Present)
 
 ### Doctoral Scholarships (2018-2022)
 - Natural Sciences and Engineering Research Council of Canada (NSERC) Alexander Graham Bell Canada Graduate Scholarship (2019-2022)
