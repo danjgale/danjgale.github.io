@@ -42,4 +42,4 @@ Note that I've left out some other dependencies of interest (e.g., `ipython`) to
 >>> brain = Brain(subject_id='fsaverage', hemi='lh', surf='inflated')
 ```
 
-You should see a rendered brain open up in a new window. With that, you're set!
+You should see a rendered brain open up in a new window. With that, you're set.

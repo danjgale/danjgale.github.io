@@ -4,7 +4,7 @@ title: "On hearing loss"
 date: 2020-08-02
 ---
 
-As a departure from the existing posts here focused on neuroimaging and programming, I want to take time to share my experience of being in academia with my congenital hearing loss. 
+As a departure from the existing posts here focused on neuroimaging and programming, I want to take time to share my experience of being in academia my congenital hearing loss. 
 
 ### Living with an invisible disability
 
@@ -16,7 +16,7 @@ Although convenient, invisibility can prevent others from recognizing the disabi
 
 Because of this, I've become very proactive about my hearing loss. I regularly rely on a number strategies to workaround my hearing in order to function close-to-normal. A great example is 'hearing with my eyes'. I'm always reading lips to some degree, and, when I can, I try to position myself so that I can see the speaker's face when they're talking. I also pay close attention to people’s speaking habits so that I can familiarize myself with their voice. 
 
-I also rely on situational awareness. I always take a quick visual scan each time I enter an unfamiliar room in order to build some expectations of sounds I might have trouble recognizing and localizing when my head is turned away (e.g., blinds clicking up against an open window on a windy day). Or, I simply position myself so that I’m always facing the room. Seeing-to-hear is a neverending exercise, so much so that I can't imagine *not* doing this.  
+I also rely on situational awareness. I always take a quick visual scan each time I enter an unfamiliar room in order to build some expectations of sounds I might have trouble recognizing and localizing when my head is turned away (e.g., blinds clicking up against an open window on a windy day). Or, I simply position myself so that I’m always facing the room, mafia-style. Seeing-to-hear is a neverending exercise, so much so that I can't imagine *not* doing this.  
 
 I will also mention my hearing loss to someone if I am struggling to hear them, and I kindly remind people about it when necessary. Admittedly, it took years to be comfortable being upfront with my hearing loss, but this is a skill that has paid off in spades. With a few exceptions, people are pretty understanding.
 
