@@ -44,7 +44,7 @@ Areshenkoff, C. N., De Brouwer, A., Gale, D. J., Nashed, J. Y., & Gallivan, J. P
 
 ## Funding and Awards
 
-### Post-doctoral Awards (2023-)
+### Post-Doctoral Awards (2023-)
 - Mitacs Post-doctoral Accelerate Program (2023-)
 
 ### Doctoral Scholarships (2018-2022)
