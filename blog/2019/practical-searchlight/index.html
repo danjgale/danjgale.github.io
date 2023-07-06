@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Dan Gale | Practical searchlight analyses with nilearn </title>
+  <meta name="description" content="Personal website and portfolio
+">
+
+  
+
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="/blog/2019/practical-searchlight/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    
+    <span class="site-title">
+        
+        <strong>Dan</strong> Gale
+    </span>
+    
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+      <div class="trigger">
+        <!-- About -->
+        <a class="page-link" href="/">about</a>
+
+        <!-- Blog -->
+        <a class="page-link" href="/blog/">blog</a>
+
+        <!-- Pages -->
+        
+          
+        
+          
+        
+          
+        
+          
+            <a class="page-link" href="/software/">software</a>
+          
+        
+          
+            <a class="page-link" href="/research/">research</a>
+          
+        
+          
+        
+
+        <!-- CV link -->
+        <!-- <a class="page-link" href="/assets/pdf/CV.pdf">vitae</a> -->
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Practical searchlight analyses with nilearn </h1>
+    <p class="post-meta">November 28, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <p>A searchlight analysis is a common fMRI technique that deploys pattern classification or representational similarity analysis across the entire brain. Areas thought to be involved in a task can be readily mapped across brain using local multivariate information rather than gross univariate differences between conditions (as with conventional GLM approaches).</p>
+
+<p>For some background, I recommend checking out <a href="https://www.pnas.org/content/103/10/3863.short">Kriegeskorete et al, (2006)</a>, which is the flagship paper on the technique. I also recommend <a href="https://www.sciencedirect.com/science/article/abs/pii/S1053811910010086">Chen et al (2011)</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S1053811910007585?via%3Dihub">Pereira &amp; Botvinick (2011)</a>, and <a href="https://www.sciencedirect.com/science/article/abs/pii/S1053811913002917">Etzel et al (2013)</a> for papers that discuss the implementation, assumptions, and challenges of searchlight analyses.</p>
+
+<p>Here, I go over how I implement a searchlight analysis with <a href="https://nilearn.github.io/modules/generated/nilearn.decoding.SearchLight.html#nilearn.decoding.SearchLight">nilearn’s <code class="language-plaintext highlighter-rouge">Searchlight</code></a> class. There is an excellent <a href="https://nilearn.github.io/decoding/searchlight.html">user guide</a> that is definitely required reading. But, I want to move past basic examples and discuss how to construct a proper searchlight analysis. Essentially, how can we use nilearn to build a searchlight analysis as seen “in the wild”?</p>
+
+<h3 id="a-minimal-example">A minimal example</h3>
+
+<p>Before we begin, I’ll admit that this post isn’t <em>fully</em> reproducible; it makes the assumption that you have readily available data to use for a searchlight. This could be a series of single-trial beta images or volumes of interest (i.e. the volume in a trial that you wish to use for searchlight). I also make the assumption that your data is in standard 2mm MNI152 space because I use a MNI brain mask.</p>
+
+<p>You can set up your data like so:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">imgs</span> <span class="o">=</span> <span class="c1"># 4D NIfTI image or list of 3D NIfTI images
+</span><span class="n">y</span> <span class="o">=</span> <span class="c1"># array-like of condition labels for each volume in `imgs` 
+</span></code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">y</code> corresponds to your response variable to be used for classification, and its length should equal the number of volumes in <code class="language-plaintext highlighter-rouge">imgs</code>.</p>
+
+<p>From here, it’s straightforward to construct a bare-bones searchlight that is similar to the one in nilearn’s user guide:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">nilearn.decoding</span> <span class="kn">import</span> <span class="n">Searchlight</span>
+<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">new_img_like</span>
+<span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="n">load_mni152_brain_mask</span> 
+
+<span class="c1"># restrict searchlight to brain voxels only
+</span><span class="n">brain_mask</span> <span class="o">=</span> <span class="n">load_mni152_brain_mask</span><span class="p">()</span>
+
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">results</code> will be a NIfTI image of containing the average cross-validation accuracy for each voxel.</p>
+
+<p>Obviously, this example is not at all representative of a searchlight analysis you would read about in a paper. The next two sections discuss a couple of aspects we need to consider when building a proper real-world searchlight analysis, which can be easily implemented thanks to scikit-learn.</p>
+
+<h3 id="building-a-proper-estimator">Building a proper estimator</h3>
+
+<p>We first need to decide on the estimator we use in our analysis. <code class="language-plaintext highlighter-rouge">Searchlight</code> uses support vector machines (SVM) by default, which is a solid choice because SVMs generally perform well with fMRI data. It’s important to note that this default is an instance of <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC">scikit-learn’s <code class="language-plaintext highlighter-rouge">LinearSVC</code></a> estimator with <code class="language-plaintext highlighter-rouge">C=1</code> (as per the <a href="https://nilearn.github.io/decoding/searchlight.html#classifier">user guide</a> and the <a href="https://github.com/nilearn/nilearn/blob/master/nilearn/decoding/searchlight.py#L31">source code</a>). <code class="language-plaintext highlighter-rouge">LinearSVC</code> uses <code class="language-plaintext highlighter-rouge">LIBLINEAR</code> under the hood instead of the more well-known <code class="language-plaintext highlighter-rouge">LibSVM</code> that is used by <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC"><code class="language-plaintext highlighter-rouge">SVC</code></a>. Although you can expect near identical results between both implementations, you’ll want to report the implementation in your paper’s methods section.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Searchlight</code> takes any scikit-learn estimator, so you are not limited to using SVMs. For instance, you can pass a logistic regression model with L1 regularization into <code class="language-plaintext highlighter-rouge">Searchlight</code> like so:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">logreg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="s">'l1'</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s">'saga'</span><span class="p">)</span>
+
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">logreg</span><span class="p">)</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But in most cases, we’ll want to move beyond just a classifier for our estimator. Typical decoding analyses, like any machine learning task, involve some sort of feature scaling. We can’t rescale our input images directly because this would eliminate the independence of our training and validation sets during cross-validation; parameters of the ‘unseen’ validation set would influence the training set. Rather, a given iteration of cross-validation should rescale the the training and validation sets only using the parameters of the training data. If this is unclear, check out <a href="https://stats.stackexchange.com/questions/77350/perform-feature-normalization-before-or-within-model-validation">this Stack Exchange post</a>.</p>
+
+<p>Scikit-learn has a number of <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing">transformer classes</a> that do this type of scaling. Much like a scikit-learn estimator, you can <em>fit</em> a transformer on the training data, and then <em>transform</em> the training and validation sets. These include classes such as <code class="language-plaintext highlighter-rouge">StandardScaler</code> and <code class="language-plaintext highlighter-rouge">MinMaxScaler</code>.</p>
+
+<p>In order to combine the scaling step with the classifier, scikit-learn allows you to build a pipeline via its <a href="https://scikit-learn.org/stable/modules/compose.html">pipeline module</a>. Pipelines chain together various scikit-learn objects so that they can be cross-validated together as a single estimator. This can be done either with the <code class="language-plaintext highlighter-rouge">Pipeline</code> class or the <code class="language-plaintext highlighter-rouge">make_pipeline</code> utility function. If we want to properly standardize our voxels within our searchlight sphere, we could set up the following pipeline:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">skearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LinearSVC</span><span class="p">())</span>
+
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                          <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">)</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+<p>In the above example, each cross-validation fold properly <em>z</em>-transforms each voxel within the searchlight sphere prior to training and validating a linear SVM classifier. We can easily to modify the pipeline to use a different classifier (e.g., logistic regression) or a different rescaling approach (e.g., mean centering). I think the above code example really speaks to how well nilearn works with scikit-learn.</p>
+
+<p>Another approach to rescaling features is to rescale <em>across</em> voxels (i.e. rescale each voxel pattern) instead of rescaling <em>within</em> voxels. If you come from a more traditional machine learning background, this sounds crazy because your features typically represent different things. However, fMRI data is a special case where the features are all of the same modality (voxels) and rescaling each voxel pattern might be more appropriate than rescaling within each voxel (e.g., wanting to remove amplitude effects in your patterns). For more, see <a href="https://www.sciencedirect.com/science/article/pii/S1053811910007834?via%3Dihub">Misaki et al (2010)</a>.</p>
+
+<p>Implementing this approach requires a little bit of effort. We need to somehow get <code class="language-plaintext highlighter-rouge">Searchlight</code> to only rescale the voxels within the searchlight sphere. We cannot rescale within each volume of <code class="language-plaintext highlighter-rouge">imgs</code> because we would be including non-sphere voxels. Therefore, pattern rescaling would have to be implemented in some sort of scikit-learn pipeline that could be fed into <code class="language-plaintext highlighter-rouge">Searchlight</code>. Scikit-learn also doesn’t have a way to change the direction of scaling because this is an atypical use-case. Thankfully, there is a way to create our own custom transformer that can be included in a pipeline. This is done via <code class="language-plaintext highlighter-rouge">FunctionTransformer</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">FunctionTransformer</span>
+
+<span class="n">pattern_scaler</span> <span class="o">=</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">zscore</span><span class="p">,</span> <span class="n">kw_args</span><span class="o">=</span><span class="p">{</span><span class="s">'axis'</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> 
+                                     <span class="n">validate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">pattern_scaler</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">())</span>
+
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">)</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Here, we’ve created a scikit-learn transformer for scipy’s <code class="language-plaintext highlighter-rouge">zscore</code> function with <code class="language-plaintext highlighter-rouge">axis=1</code> so that we scale within each pattern instead of within each voxel. I recommend trying each approach and comparing the searchlight maps for curiosity’s sake.</p>
+
+<h3 id="defining-a-cross-validation-scheme">Defining a cross-validation scheme</h3>
+
+<p>Next, we need to consider how we want to cross-validate our classifier, because <code class="language-plaintext highlighter-rouge">Searchlight</code> uses 3-fold cross-validation by default (a carryover from scikit-learn). In contrast, a typical searchlight analysis uses either leave-one-out cross-validation (LOOCV) or leave-one-run-out cross-validation (LOROCV).</p>
+
+<p>Of the two methods, LOROCV is preferred. First, the held out validation sets in LOROCV are from entirely independent scanning runs. Meanwhile, training data in LOOCV contains data from the same scanning run as the validation set, making LOOCV more prone to overfitting because the validation data are not truly independent. As well, LOROCV uses fewer cross-validation folds, which is more computationally efficient (this matters a lot with searchlight analyses). For more on choosing a cross-validation scheme, refer to <a href="https://www.sciencedirect.com/science/article/pii/S1053811910007834?via%3Dihub">Misaki et al (2010)</a> and <a href="https://www.sciencedirect.com/science/article/pii/S105381191630595X?via%3Dihub">Varoquaux et al (2017)</a>.</p>
+
+<p>Implementing either LOOCV or LOROCV with nilearn is fairly easy. <code class="language-plaintext highlighter-rouge">Searchlight</code> has a <code class="language-plaintext highlighter-rouge">cv</code> parameter that takes an instance of a scikit-learn <a href="https://scikit-learn.org/stable/modules/classes.html#splitter-classes">splitter class</a>. Scikit-learn provides a splitter class for both LOOCV and LOROCV, among others.</p>
+
+<p>For LOOCV:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">LeaveOneOut</span>
+
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> 
+                          <span class="n">cv</span><span class="o">=</span><span class="n">LeaveOneOut</span><span class="p">())</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>LOROCV requires additional labels to group each image according to its scanning run. Then, these labels are fed into <code class="language-plaintext highlighter-rouge">fit_transform</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">LeaveOneGroupOut</span>
+
+<span class="n">run_labels</span> <span class="o">=</span> <span class="c1"># array-like of run labels for each volume of `imgs`
+</span>
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> 
+                          <span class="n">cv</span><span class="o">=</span><span class="n">LeaveOneGroupOut</span><span class="p">())</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">run_labels</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searclight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="putting-it-all-together">Putting it all together</h3>
+
+<p>Now we can put things together to turn our minimal example into a fully-fledged analysis (also available as a <a href="https://gist.github.com/danjgale/3988f424c1a86051b2aa84b429ffd84d">gist</a>). The final product looks like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">nilearn.decoding</span> <span class="kn">import</span> <span class="n">Searchlight</span>
+<span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="n">load_mni152_brain_mask</span>
+<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">new_img_like</span> 
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">LeaveOneGroupOut</span>
+
+<span class="n">imgs</span> <span class="o">=</span> <span class="c1"># 4D NIfTI image or list of 3D NIfTI images
+</span><span class="n">y</span> <span class="o">=</span> <span class="c1"># array-like of condition labels for each volume in `imgs` 
+</span><span class="n">run_labels</span> <span class="o">=</span> <span class="c1"># array-like of run labels for each volume of `imgs`
+</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LinearSVC</span><span class="p">())</span>
+
+<span class="n">brain_mask</span> <span class="o">=</span> <span class="n">load_mni152_brain_mask</span><span class="p">()</span>
+<span class="n">searchlight</span> <span class="o">=</span> <span class="n">Searchlight</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> 
+                          <span class="n">cv</span><span class="o">=</span><span class="n">LeaveOneGroupOut</span><span class="p">())</span>
+<span class="n">searchlight</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">run_labels</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">new_img_like</span><span class="p">(</span><span class="n">brain_mask</span><span class="p">,</span> <span class="n">searchlight</span><span class="p">.</span><span class="n">scores_</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Voila! There is a single-subject searchlight pipeline. You can imagine putting this into a function and running this for each subject.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>I hope that this post can give some insight into how to move beyond simple toy examples and into actual real-world analyses with nilearn’s <code class="language-plaintext highlighter-rouge">Searchlight</code>. When I first started out with searchlight analyses, these details were not immediately obvious.</p>
+
+<p>Building a realistic “publication-ready” searchlight analysis requires familiarity with scikit-learn and machine learning best practices. <code class="language-plaintext highlighter-rouge">Searchlight</code> simply runs whatever you give it and its up to you to construct the approach for your data. Thankfully, the scikit-learn and nilearn documentation are excellent, and many of the papers linked in this post do a great job at discussing these necessary details.</p>
+
+<p>One thing I don’t discuss is how to combine multiple single-subject searchlight results into a group-level analysis. Group-level searchlight analysis is a different can of worms altogether, and probably warrants its own post sometime in the future. But for now, I hope that this post is useful for those wanting to get a better sense of a proper implementation of a searchlight analysis in Python.</p>
+
+  </article>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer>
+
+  <div class="wrapper">
+    &copy; Copyright 2023 Dan Gale.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+
+    
+  </div>
+
+</footer>
+
+
+    <!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+<!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="/assets/js/katex.js"></script>
+
+
+
+
+<!-- Include custom icon fonts -->
+<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/assets/css/academicons.min.css">
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+
+</html>

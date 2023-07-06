@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Dan Gale | Setting up pysurfer in python 3.6</title>
+  <meta name="description" content="Personal website and portfolio
+">
+
+  
+
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="/blog/2018/pysurfer-python36/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    
+    <span class="site-title">
+        
+        <strong>Dan</strong> Gale
+    </span>
+    
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+      <div class="trigger">
+        <!-- About -->
+        <a class="page-link" href="/">about</a>
+
+        <!-- Blog -->
+        <a class="page-link" href="/blog/">blog</a>
+
+        <!-- Pages -->
+        
+          
+        
+          
+        
+          
+        
+          
+            <a class="page-link" href="/software/">software</a>
+          
+        
+          
+            <a class="page-link" href="/research/">research</a>
+          
+        
+          
+        
+
+        <!-- CV link -->
+        <!-- <a class="page-link" href="/assets/pdf/CV.pdf">vitae</a> -->
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Setting up pysurfer in python 3.6</h1>
+    <p class="post-meta">August 26, 2018</p>
+  </header>
+
+  <article class="post-content">
+    <hr />
+<p><strong>Update:</strong> Pysurfer now supports Python 3.6+ according to the <a href="http://pysurfer.github.io/install.html">documentation</a>. Installation worked well out-of-the-box with <code class="language-plaintext highlighter-rouge">pysurfer&gt;=0.9.0</code> when I tested it with both Linux and OSX. This is great news. I did have a small issue configuring <code class="language-plaintext highlighter-rouge">QT</code> to work with pysurfer and I discuss the solution <a href="https://github.com/nipy/PySurfer/issues/262#issuecomment-467574981">here</a>. If you are using earlier versions of Pysurfer, then keep reading.</p>
+
+<hr />
+
+<p><a href="http://pysurfer.github.io">Pysurfer</a> is an excellent Python library for visualizing neuroimaging data using <a href="https://surfer.nmr.mgh.harvard.edu">Freesurfer</a>. With an elegant API and fantastic documentation, Pysurfer is a pleasure to use. Despite this, I <em>did</em> encounter some initial difficulties getting Pysurfer installed in my Python 3.6 workflow.</p>
+
+<p>For starters, getting some of Pysurfer’s dependencies (e.g., <a href="http://docs.enthought.com/mayavi/mayavi/index.html">Mayavi</a>, <a href="https://www.vtk.org/">VTK</a>) caused headaches either during the installation process or after; this was no surprise given what’s been discussed out there (for example, see <a href="https://github.com/enthought/mayavi/issues/625">1</a>, <a href="https://stackoverflow.com/questions/45100010/conflict-while-installing-mayavi-into-anaconda">2</a>, <a href="http://bluesimplex.com/2017/02/04/installing_mayavi_with_python_3.html">3</a>). As well, I also expected some difficulty given that the <a href="http://pysurfer.github.io/install.html">documentation</a>, at the time of this writing, states that Pysurfer only works with Python 2. I saw that there had been some <a href="https://github.com/nipy/PySurfer/issues/217">discussion</a> on getting Pysurfer to work in Python 3 using <code class="language-plaintext highlighter-rouge">conda</code>, but I was still having some issues, particularly with <code class="language-plaintext highlighter-rouge">VTK</code> and <code class="language-plaintext highlighter-rouge">PyQt</code>. Also notice that in the discussion they were able to get it working with Linux, but not MacOs (what I’m using); I suspect that was the source of my problem, or at least part of it.</p>
+
+<p>Sitting down with <a href="https://twitter.com/rossdavism">Ross Markello</a>, we were able solve the dependency issues and get everything working exactly the way I had hoped in 3.6. The trick is to run Pysurfer in a fresh <code class="language-plaintext highlighter-rouge">conda</code> environment and set <code class="language-plaintext highlighter-rouge">PyQT</code> and <code class="language-plaintext highlighter-rouge">VTK</code> versions specific to the environment. We largely based our installation off of <a href="https://github.com/KirstieJane/DESCRIBING_DATA/wiki/Making-Surface-Plots-with-Pysurfer">Kirstie Whitaker’s great instructions</a> for 2.7 (if you <em>are</em> interested in using Pysurfer with Python 2, I suggest you stick to those instructions).</p>
+
+<p>Here, I’ve documented the installation steps to get Pysurfer working with Python 3 on MacOS (I’m guessing these steps also hold for Linux) in a new <code class="language-plaintext highlighter-rouge">conda</code> environment.</p>
+
+<h3 id="installation-steps">Installation Steps</h3>
+<p><strong>Requirements:</strong> Before we begin, you’ll need to install <a href="https://conda.io/docs/">conda</a> and Freesurfer (follow the installation steps for your operating system, as is, <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall">here</a>) if they are not already installed.</p>
+
+<p>First, let’s set up our <code class="language-plaintext highlighter-rouge">conda</code> environment. We’ll want to specify Python 3.6 and install some initial dependencies (note the specific <code class="language-plaintext highlighter-rouge">PyQT</code> and <code class="language-plaintext highlighter-rouge">VTK</code> versions):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ conda create -n pysurfer python=3.6 pip mkl numpy scipy matplotlib "pyqt&gt;=5.9" "vtk&gt;8" pygments traits traitsui pyface
+</code></pre></div></div>
+
+<p>Now let’s activate the <code class="language-plaintext highlighter-rouge">pysurfer</code> environment, install the remaining dependencies, and finally Pysurfer itself:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source activate pysurfer
+$ pip install mayavi nibabel imageio
+$ pip install pysurfer
+</code></pre></div></div>
+
+<p>Note that I’ve left out some other dependencies of interest (e.g., <code class="language-plaintext highlighter-rouge">ipython</code>) to keep things minimal for now. Once everything is installed, fire up your Python terminal and test out your installation (based on <a href="http://pysurfer.github.io/auto_examples/plot_basics.html#sphx-glr-auto-examples-plot-basics-py">this example</a>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">surfer</span> <span class="kn">import</span> <span class="n">Brain</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">subject_id</span><span class="o">=</span><span class="s">'fsaverage'</span><span class="p">,</span> <span class="n">hemi</span><span class="o">=</span><span class="s">'lh'</span><span class="p">,</span> <span class="n">surf</span><span class="o">=</span><span class="s">'inflated'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You should see a rendered brain open up in a new window. With that, you’re set.</p>
+
+  </article>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer>
+
+  <div class="wrapper">
+    &copy; Copyright 2023 Dan Gale.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+
+    
+  </div>
+
+</footer>
+
+
+    <!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+<!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="/assets/js/katex.js"></script>
+
+
+
+
+<!-- Include custom icon fonts -->
+<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/assets/css/academicons.min.css">
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+
+</html>

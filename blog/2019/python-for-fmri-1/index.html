@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Dan Gale | Python for fMRI: A tour of key fMRI packages</title>
+  <meta name="description" content="Personal website and portfolio
+">
+
+  
+
+  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="canonical" href="/blog/2019/python-for-fmri-1/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    
+    <span class="site-title">
+        
+        <strong>Dan</strong> Gale
+    </span>
+    
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+      <div class="trigger">
+        <!-- About -->
+        <a class="page-link" href="/">about</a>
+
+        <!-- Blog -->
+        <a class="page-link" href="/blog/">blog</a>
+
+        <!-- Pages -->
+        
+          
+        
+          
+        
+          
+        
+          
+            <a class="page-link" href="/software/">software</a>
+          
+        
+          
+            <a class="page-link" href="/research/">research</a>
+          
+        
+          
+        
+
+        <!-- CV link -->
+        <!-- <a class="page-link" href="/assets/pdf/CV.pdf">vitae</a> -->
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Python for fMRI: A tour of key fMRI packages</h1>
+    <p class="post-meta">March 10, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <p>Those who know me know that I am a huge fan of Python. I find Python to be an incredibly useful programming language for neuroscience and I prefer it to other languages for fMRI research (although I am not interested in engaging in any sort of “language war”, see <a href="https://sebastianraschka.com/blog/2015/why-python.html">here</a> for a nice discussion on that). Recent commentaries from <a href="https://arxiv.org/abs/1809.10024">Poldrack et al</a> and <a href="https://www.cell.com/trends/cognitive-sciences/fulltext/S1364-6613(19)30021-X">Wessel et al</a>, along with <a href="https://neurohackademy.org/">summer school programs</a> aimed towards open source software in science, suggest that Python is growing in neuroscience. Anecdotally, I have seen more and more colleagues show interest in Python, with some making the full switch altogether.</p>
+
+<p>So, I decided to write a blog post that introduces the Python fMRI landscape by describing some key packages. I hope people can find this useful if they’re new to fMRI, new to Python, or both!</p>
+
+<h3 id="pythons-scientific-computing-ecosystem">Python’s Scientific Computing Ecosystem</h3>
+
+<p>First, just some background on Python in science. Scientific computing with Python is no new concept, but with the rise of data science over the last 10-15 years, and thanks to a number of powerful libraries developed within that time-frame, Python has surged in popularity in recent years for scientific computing and data analysis. Python for data analysis is typically discussed with reference to the “PyData stack”, which includes packages such as <a href="https://docs.scipy.org/doc/"><em>numpy</em> and <em>scipy</em></a>, <a href="https://pandas.pydata.org/"><em>pandas</em></a>, <a href="http://matplotlib.org/"><em>matplotlib</em></a>, <a href="https://scikit-learn.org/stable/"><em>scikit-learn</em></a>, and <a href="https://jupyter.org/"><em>jupyter</em></a> (to name a few). There are an overwhelming number of resources on this topic, but the best quality resources I’ve found are the <a href="http://scipy-lectures.org/">Scipy Lectures</a>, <a href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> and <a href="http://wesmckinney.com/pages/book.html">Python for Data Analysis</a> (this last one is not freely available, but I still recommend it). If you’re not already acquainted with the basics of Python’s scientific computing ecosystem, I suggest diving into those resources first.</p>
+
+<p>MRI analysis with Python has its own set of packages, many of which can be found at <a href="http://nipy.org/">nipy.org</a>. The packages I am discussing here are ones I use on a regular basis, so this post is definitely biased towards my use case (BOLD fMRI). Packages on <em>nipy</em> that are not mentioned here are obviously just as valuable, and I would encourage you to explore their documentation more in depth.</p>
+
+<p>A typical project will involve fMRI-specific packages on top of the general scientific packages I mentioned earlier. While such sets of dependencies might sound foreign to more niche programming languages like MATLAB, this reflects the nature of Python being a general programming language. As well, having the ability to require specific dependencies (and particular versions) is great when you begin to use Python across several different projects or domains, because for each project you can only require what you need. Dependency/package management is a whole other topic, and I recommend reading more <a href="https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c">here</a> and <a href="https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/">here</a> if you are interested.</p>
+
+<h3 id="fmri-packages">fMRI Packages</h3>
+
+<h4 id="nibabel">Nibabel</h4>
+
+<p><a href="https://nipy.org/nibabel/"><em>nibabel</em></a> is a package for working with directly with NIfTI files and similar neuroimaging formats (e.g., GIFTI). <em>nibabel</em> allows you to read in an image file so you can access the data itself in the form of a <em>numpy</em> array, as well as the associated header information and affine matrix. A typical use-case for <em>nibabel</em> is to load an image, perform some sort of manipulation (e.g., creating a binary mask based on some threshold), and save the results back to a NIfTI image. Because the data is in a <em>numpy</em> array, you can conveniently to use whatever <em>numpy</em> functionality you want. All packages discussed here rely on <em>nibabel</em> in some form or another to read, process, and save fMRI data files, making <em>nibabel</em> an essential package for neuroimaging.</p>
+
+<h4 id="nipype">Nipype</h4>
+
+<p><a href="https://nipype.readthedocs.io/en/latest/index.html"><em>nipype</em></a> is a powerful Python interface for interacting with all major neuroimaging software. Your project might consist of several different software packages (e.g., FSL, SPM), which likely requires managing all sorts of scripts. <em>nipype</em> offers a solution to this often messy process by providing a single Python interface to join together tools from different software packages. With <em>nipype</em>, you essentially create a network of nodes, each of which are a Python class representing a step in your pipeline. <em>nipype</em> provides a syntax that allows you to map each node’s inputs and outputs, like various parameters or data files, to one another in order to assemble your pipeline node-by-node.</p>
+
+<p>There are two features I particularly enjoy about <em>nipype</em>. First, using <em>nipype</em> to glue together your pipeline means that you clearly describe your data flow under a unifying syntax. I can read a <em>nipype</em> script from top to bottom and immediately understand each step in the process – you could imagine that this is also helpful for general reproducibility purposes. Second, you can easily parallelize your entire pipeline using the <a href="https://nipype.readthedocs.io/en/0.11.0/users/plugins.html#multiproc">multiproc</a> plugin, which really only requires changing one line of code. So, for the exact same code/pipeline, you can cut down on processing time just by specifying how many processors you want to use. I have found this pretty convenient for longer processing tasks (e.g., spatial normalization).</p>
+
+<p>Personally, I think <em>nipype</em> has a steep learning curve. To mitigate this, I highly recommend having solid grasp with whatever fMRI software you are using before transforming it into a Nipype pipeline. Also, there are plenty of resources available; Michael Notter’s <a href="https://miykael.github.io/nipype_tutorial/">fantastic tutorial series</a> are an absolute must-read when starting out, and the <em>nipype</em> <a href="https://nipype.readthedocs.io/en/latest/documentation.html">documentation/tutorials</a> and <a href="https://www.frontiersin.org/articles/10.3389/fninf.2011.00013/full">publication</a> describe the software in great detail. There is a lot to learn, but <em>nipype</em> is definitely worth the investment if you regularly interact with existing fMRI software.</p>
+
+<h4 id="nilearn">Nilearn</h4>
+
+<p>If I have to pick a favorite package discussed here, <a href="http://nilearn.github.io/index.html"><em>nilearn</em></a> definitely wins. <em>nilearn</em> is a package that provides a number of functions to help perform a variety of multivariate techniques specifically on neuroimaging data. It complements <em>scikit-learn</em> (hence the name), the main machine-learning library in Python, and features a similar API design that is straightforward to use.</p>
+
+<p>A number of analyses are possible with <em>nilearn</em>. For basic decoding analysis, you can just use one of <em>scikit-learn</em>’s classifiers (e.g., <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC">support vector machine</a>) for voxel pattern classification. But if you want techniques more specific to fMRI, such as a <a href="http://nilearn.github.io/modules/generated/nilearn.decoding.SearchLight.html#nilearn.decoding.SearchLight">searchlight</a> or more <a href="http://nilearn.github.io/modules/generated/nilearn.decoding.SpaceNetClassifier.html#nilearn.decoding.SpaceNetClassifier">powerful classifiers</a>, <em>nilearn</em> directly provides those options. <em>nilearn</em> is also well-equipped for a variety of brain mapping and network approaches, such as <a href="http://nilearn.github.io/modules/generated/nilearn.connectome.ConnectivityMeasure.html#nilearn.connectome.ConnectivityMeasure">functional connectivity analysis</a>, <a href="http://nilearn.github.io/modules/generated/nilearn.decomposition.CanICA.html#nilearn.decomposition.CanICA">independent component analysis</a>, and <a href="http://nilearn.github.io/modules/generated/nilearn.regions.Parcellations.html#nilearn.regions.Parcellations">clustering techniques for brain parcellation</a>.</p>
+
+<p>But what puts <em>nilearn</em> over the top is all of the utilities that make it easy to assemble a complete analysis. Once your data is minimally preprocessed (with a <em>nipype</em> preprocessing pipeline, for instance), it is easy to <a href="http://nilearn.github.io/manipulating_images/masker_objects.html">extract voxel/region data</a> and <a href="http://nilearn.github.io/manipulating_images/manipulating_images.html">apply the remaining preprocessing</a> for whatever analysis you plan to run. <em>nilearn</em> offers ways to do this either by individual regions or by commonly-used brain atlases (many of which, by the way, are included with <em>nilearn</em>). On top of this, <em>nilearn</em> has a number of plotting functions that allow you to visualize your brain data, such as  statistical maps (either in 3D volumetric space or on a 2D surface) and connectivity matrices.</p>
+
+<p>For further reading, I recommend checking out <em>nilearn</em>’s <a href="http://nilearn.github.io/user_guide.html">user guide</a>, which is an excellent general introduction to multivariate approaches as well. I also recommend reading the <a href="https://www.frontiersin.org/articles/10.3389/fninf.2014.00014/full">publication</a> that discusses machine-learning analyses in neuroimaging with <em>scikit-learn</em> and the development of <em>nilearn</em>, which provides some additional context to the package.</p>
+
+<p class="notice"><strong>Note:</strong> There is a another machine-learning library for neuroimaging called <a href="http://www.pymvpa.org/"><em>PyMVPA</em></a>, which predates <em>nilearn</em>. I personally find <em>nilearn</em> + <em>scikit-learn</em> + <em>numpy/scipy</em> sufficient for all my needs thus far and haven’t much of a chance to use <em>PyMVPA</em>. However, it does have some useful routines for specific use cases, such as <a href="http://www.pymvpa.org/generated/mvpa2.algorithms.group_clusterthr.GroupClusterThreshold.html">cluster-thresholding searchlight maps</a> and <a href="http://www.pymvpa.org/generated/mvpa2.algorithms.hyperalignment.html#module-mvpa2.algorithms.hyperalignment">hyperalignment</a>. I would encourage anyone to check it out if they might find it useful!</p>
+
+<h4 id="nistats">Nistats</h4>
+
+<p>For conventional mass-univariate analysis, you can use <em>nipype</em> to interact with whatever software you want (e.g., SPM). However, a recent package called <a href="https://nistats.github.io/index.html"><em>nistats</em></a> let’s you model your fMRI data directly in Python. Running univariate analyses within Python is great if you want to extract voxel beta-estimates for subsequent analyses that you’re also running in Python (e.g., a decoding analysis with <em>nilearn</em>). Moreover, <em>nistats</em>  is a breeze if you already know <em>nilearn</em> because both packages are largely developed by the same contributors and share similar API design (much like with <em>scikit-learn</em>).</p>
+
+<p><em>nistats</em> has several nice features. It makes it easy to fully run first- and second-level analyses with your data, and like <em>nilearn</em>, it comes with useful additional functions. For instance, it provides a quick and easy way to <a href="https://nistats.github.io/modules/generated/nistats.thresholding.map_threshold.html#nistats.thresholding.map_threshold">threshold your statistical maps</a>, <a href="https://nistats.github.io/modules/generated/nistats.reporting.get_clusters_table.html#nistats.reporting.get_clusters_table">extract cluster information</a>, or <a href="https://nistats.github.io/modules/generated/nistats.hemodynamic_models.compute_regressor.html#nistats.hemodynamic_models.compute_regressor">convolve regressors</a> with a hemodynamic response function.</p>
+
+<p>As with any package undergoing development in its early stages, <em>nistats</em> might change significantly between versions and/or may be more susceptible to bugs. There is also a likelihood that <em>nistats</em> <a href="https://github.com/nistats/nistats/issues/233">might combine with <em>nilearn</em> in the near future</a> in the future. The development of <em>nistats</em> is very exciting, but I recommend keeping this all in mind if you are interested in using it now.</p>
+
+<h4 id="pysurfer">Pysurfer</h4>
+
+<p>The last package I want to discuss today is <a href="http://pysurfer.github.io/index.html"><em>pysurfer</em></a>, which lets you interact with <a href="https://surfer.nmr.mgh.harvard.edu/">Freesurfer</a> to visualize your brain images on surfaces. The package features one major class, <code class="language-plaintext highlighter-rouge">Brain</code>, which easily lets you add data, regions of interest, contours, and more to your figure. <em>pysurfer</em> offers more flexibility than <em>nilearn</em> for plotting on 2D surfaces, which makes sense given that visualization is the main purpose. Together with <em>nilearn</em>, pretty much all of your common brain plotting tasks can be performed in Python, which ultimately lets you work with Python’s plotting ecosystem (e.g., <em>matplotlib</em>,  <a href="https://seaborn.pydata.org/index.html"><em>seaborn</em></a>) to create fully reproducible figures for publication. Excellent examples of <em>pysurfer</em> being used “in the wild” are the codebases for Waskom et al <a href="https://github.com/WagnerLabPapers/Waskom_CerebCortex_2017">1</a> and <a href="https://github.com/WagnerLabPapers/Waskom_PNAS_2017">2</a>.</p>
+
+<p class="notice"><strong>Note:</strong> There are a few other cool other brain visualization libraries that are definitely worth checking out, like <a href="https://gallantlab.github.io/"><em>pycortex</em></a> and <a href="http://visbrain.org/"><em>visbrain</em></a>.</p>
+
+<h4 id="other-packages">Other Packages</h4>
+
+<p>There are several other <em>nipy</em> packages out there, including <a href="http://nipy.org/dipy/"><em>dipy</em></a> for diffusion tensor imaging, <a href="https://mindboggle.info/"><em>mindboggle</em></a> for brain morphometry, and <a href="http://nipy.org/nitime/"><em>nitime</em></a> for time-series analysis. There are also tons of smaller projects, such as <a href="https://github.com/HBClab/NiBetaSeries"><em>NiBetaSeries</em></a> for beta-series correlation analysis,  <a href="https://github.com/miykael/atlasreader"><em>atlasreader</em></a> for automatically extracting cluster information, and <a href="https://github.com/kaczmarj/neurodocker"><em>neurodocker</em></a> for encapsulating your entire fMRI software environment within Docker. These are just some of what other packages exist; by no means is this an exhaustive list.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+
+<p>Altogether, Python provides a rich ecosystem for fMRI. Working with the above-mentioned fMRI packages on top of Python’s general scientific ecosystem, it is possible to build any step in your fMRI analysis. Once your data is preprocessed with a <em>nipype</em> pipeline (or with <a href="https://fmriprep.readthedocs.io/en/stable/index.html"><em>fmriprep</em></a>, a ready-to-use automated pipeline built with <em>nipype</em>), you can work with a variety of packages to analyze and visualize your data all within Python.</p>
+
+<p>It is a pretty exciting time to be a neuroimager and/or a Python user given all the tools and how rapidly the ecosystem is expanding (as is Python’s general scientific ecosystem).  There are also lots of opportunities to get involved with existing packages or contribute your own project that others may find useful. All in all, I highly recommend exploring what Python has to offer for fMRI if you think it would benefit you and your fMRI research.</p>
+
+  </article>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer>
+
+  <div class="wrapper">
+    &copy; Copyright 2023 Dan Gale.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+
+    
+  </div>
+
+</footer>
+
+
+    <!-- Load jQuery -->
+<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+<!-- Load KaTeX -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="/assets/js/katex.js"></script>
+
+
+
+
+<!-- Include custom icon fonts -->
+<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/assets/css/academicons.min.css">
+
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXXXXXX', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+
+</html>
