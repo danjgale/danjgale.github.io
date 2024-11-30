@@ -11,4 +11,4 @@ news: false
 social: true
 ---
 <br>
-I am Data Scientist with [VoxelAI](https://www.voxel.ai/) and a Post-Doctoral Fellow with the [Centre for Neuroscience Studies](https://neuroscience.queensu.ca/) at Queen's University. As an expert in MRI data analysis and scientific software development, I build state-of-the-art brain imaging platforms and conduct analyses to quantify changes in brain function throughout the lifespan and in experimental contexts.
+I am Data Scientist with [VoxelAI](https://www.voxel.ai/) and a Post-Doctoral Fellow with the [Centre for Neuroscience Studies](https://neuroscience.queensu.ca/) at Queen's University. I have deep expertise in MRI data analysis and scientific software development; across my roles in research and technology, I build state-of-the-art brain imaging platforms in order to study changes in brain function over time.
