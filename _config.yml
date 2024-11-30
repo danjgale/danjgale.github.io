@@ -4,7 +4,7 @@
 name: Dan Gale
 email: d.gale@queensu.ca
 description: > # this means to ignore newlines until "url:"
-  Personal website and portfolio
+  Dan Gale's personal website
 footer_text: >
   Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
@@ -26,7 +26,7 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 # Social integration
 # -----------------------------------------------------------------------------
 github_username: danjgale
-twitter_username: danjgale
+# twitter_username: danjgale
 linkedin_username: galedaniel
 scholar_userid: # your Google Scholar ID
 orcid_id: # your ORCID ID
