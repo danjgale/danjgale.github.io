@@ -5,7 +5,7 @@ title: <h1>Dan Gale, Ph.D.</h1>
 description: Neuroscience | Data Science | Software Development
 
 profile:
-  align: right
+  align: left
   image: profile.png
 news: false
 social: true
