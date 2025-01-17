@@ -8,14 +8,14 @@ title: research
 
 I completed my PhD in Neuroscience at Queen's University under the supervision of [Dr. Jason Gallivan](http://www.gallivanmaplab.com/) and [Dr. Randy Flanagan](http://www.flanaganlab.com/). Broadly, I studied how the brain's motor, sensory, and cognitive systems interact in order to prepare movement, as well as adapt movements in response to changing environments. 
 
-Currently, my primary research aim is studying longitudinal changes in brain structure and function in non-human primate populations under different social contexts. My secondary aims are developing new brain imaging analysis methods, and assisting with the implementation of advanced methods in several ongoing projects as a collaborator.
+Currently, my primary research aim is studying longitudinal changes in brain structure and function in non-human primate populations under different social contexts. My secondary aims are developing new brain imaging analysis methods, and assisting with the implementation of advanced methods in several ongoing projects as a key collaborator.
 
 ---
 
 ### Funding and Awards
 
-#### Post-Doctoral Awards (2023-Present)
-- Mitacs Post-Doctoral Accelerate Fellowship Program (2023-Present)
+#### Post-Doctoral Awards (2022-Present)
+- Mitacs Post-Doctoral Accelerate Fellowship Program (2023-2024)
 
 #### Doctoral Scholarships (2018-2022)
 - Natural Sciences and Engineering Research Council of Canada (NSERC) Alexander Graham Bell Canada Graduate Scholarship (2019-2022)
